@@ -23,7 +23,7 @@ const run = async() => {
     try {
         await client.connect();
 
-        const db1 = client.db('WanderLastDB');
+        const db1 = client.db('WanderLastDB1');
         const destinationCollection = db1.collection('destinations');
 
         app.get('/destinations', async(req, res) => {
