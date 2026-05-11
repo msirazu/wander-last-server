@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 const cors = require('cors');
 
@@ -28,6 +28,15 @@ const run = async() => {
 
         app.get('/destinations', async(req, res) => {
             const result = await destinationCollection.find().toArray();
+            res.send(result);
+        });
+
+        app.get('/destinations/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {
+                _id: new ObjectId(id)
+            }
+            const result = await destinationCollection.findOne(query);
             res.send(result);
         });
 
