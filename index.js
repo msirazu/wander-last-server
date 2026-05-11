@@ -23,6 +23,14 @@ const run = async() => {
     try {
         await client.connect();
 
+        const db1 = client.db('WanderLastDB');
+        const destinationCollection = db1.collection('destinations');
+
+        app.get('/destinations', async(req, res) => {
+            const result = await destinationCollection.find().toArray();
+            res.send(result);
+        });
+
         await client.db("admin").command({ ping: 1 });
 
     console.log('Pinged your deployment. You successfully connected to MongoDB!');
