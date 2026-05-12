@@ -40,6 +40,12 @@ const run = async() => {
             res.send(result);
         });
 
+        app.post('/destinations', async(req, res) => {
+            const newDestination = req.body;
+            const result = await destinationCollection.insertOne(newDestination);
+            res.send(result);
+        });
+
         app.delete('/destination-detail/:id', async(req, res) => {
             const id = req.params.id;
             const query = {
