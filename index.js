@@ -31,12 +31,21 @@ const run = async() => {
             res.send(result);
         });
 
-        app.get('/destinations/:id', async(req, res) => {
+        app.get('/destination-detail/:id', async(req, res) => {
             const id = req.params.id;
             const query = {
                 _id: new ObjectId(id)
             }
             const result = await destinationCollection.findOne(query);
+            res.send(result);
+        });
+
+        app.delete('/destination-detail/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {
+                _id: new ObjectId(id)
+            }
+            const result = await destinationCollection.deleteOne(query);
             res.send(result);
         });
 
