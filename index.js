@@ -46,6 +46,18 @@ const run = async() => {
             res.send(result);
         });
 
+        app.patch('/destination-detail/:id', async(req, res) => {
+            const id = req.params.id;
+            const updatedDestination = req.body;
+            const query = {
+                _id: new ObjectId(id)
+            }
+            const result = await destinationCollection.updateOne(query, {
+                $set: updatedDestination
+            });
+            res.json(result);
+        });
+
         app.delete('/destination-detail/:id', async(req, res) => {
             const id = req.params.id;
             const query = {
